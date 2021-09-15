@@ -1,3 +1,5 @@
+import { avatar } from "../config/config.ts"
+
 const departments: Array<{
     name: string;
     grades: Array<{
@@ -43,7 +45,7 @@ for await (const department of Deno.readDir(entryPath)) {
             }
             students.push({
                 name: student.name,
-                avatar: "",
+                avatar: avatar[student.name] ?? "",
                 stickers: stickers
             })
         }

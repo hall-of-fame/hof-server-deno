@@ -21,4 +21,5 @@ export const popular: Array<{
     desc: string,
     url: string
 }> = config.popular ?? [];
+export const avatar: Record<string, string> = config.avatar ?? {};
 
