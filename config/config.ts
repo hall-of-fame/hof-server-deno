@@ -16,4 +16,9 @@ if (await exists("./config/private.json")) {
 }
 
 export const port = config.port;
+export const popular: Array<{
+    author: string,
+    desc: string,
+    url: string
+}> = config.popular ?? [];
 
