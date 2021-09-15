@@ -1,7 +1,8 @@
 import { Context } from "https://deno.land/x/oak@v9.0.0/mod.ts";
+import departmentsData from "./services/departments.ts";
 
 function departments(ctx: Context) {
-    console.log("departments")
+    ctx.response.body = departmentsData;
 }
 
 function multiple(ctx: Context) {
