@@ -31,14 +31,14 @@ for await (const department of Deno.readDir(entryPath)) {
                     for await (const sticker of Deno.readDir(categoryDir)) {
                         stickers.push({
                             desc: sticker.name.replace(/(.*)\.(.*)/, "$1"),
-                            url: `/static/${department.name}/${grade.name}/${student.name}/${item.name}/${sticker.name}`
+                            url: `/static/departments/${department.name}/${grade.name}/${student.name}/${item.name}/${sticker.name}`
                                 .replaceAll(" ", "%20")
                         });
                     }
                 } else {
                     stickers.push({
                         desc: item.name.replace(/(.*)\.(.*)/, "$1"),
-                        url: `/static/${department.name}/${grade.name}/${student.name}/${item.name}`
+                        url: `/static/departments/${department.name}/${grade.name}/${student.name}/${item.name}`
                             .replaceAll(" ", "%20")
                     });
                 }
