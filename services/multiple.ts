@@ -15,6 +15,7 @@ for await (const sticker of Deno.readDir(entryPath)) {
         author: res[1],
         desc: res[2],
         url: `/static/multiple/${sticker.name}`
+            .replaceAll(" ", "%20")
     })
 }
 
