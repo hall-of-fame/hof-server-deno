@@ -1,4 +1,4 @@
-import { Application, Router } from "https://deno.land/x/oak@v9.0.0/mod.ts";
+import { Application, Router, send } from "https://deno.land/x/oak@v9.0.0/mod.ts";
 import { departments, multiple, popular } from "./routers.ts";
 import { port } from "./config/config.ts"
 
@@ -8,6 +8,22 @@ const router = new Router()
     .get("/multiple", multiple)
     .get("/popular", popular);
 
+app.use(async (ctx) => {
+    if (ctx.request.url.pathname.startsWith("/static/")) {
+        try {
+            await send(ctx, ctx.request.url.pathname.slice(8), {
+                root: `${Deno.cwd()}/static/`,
+            })
+        } catch (error) {
+            if (error.name === "NotFoundError") {
+                console.log(`404: ${
+                    decodeURI(ctx.request.url.pathname).replaceAll(" ", "%20")
+                }`)
+            }
+        }
+    }
+})
+
 app.addEventListener("listen", ({ hostname, port }) => {
     console.log(
         `Listening on: http://${hostname ?? "localhost"}:${port}`,
@@ -15,5 +31,7 @@ app.addEventListener("listen", ({ hostname, port }) => {
 });
 
 app.use(router.routes());
+
+
 
 await app.listen({ port });
