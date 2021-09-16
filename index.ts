@@ -8,7 +8,7 @@ const router = new Router()
     .get("/multiple", multiple)
     .get("/popular", popular);
 
-app.use(async (ctx) => {
+app.use(async (ctx, next) => {
     if (ctx.request.url.pathname.startsWith("/static/")) {
         try {
             await send(ctx, ctx.request.url.pathname.slice(8), {
@@ -16,10 +16,14 @@ app.use(async (ctx) => {
             })
         } catch (error) {
             if (error.name === "NotFoundError") {
-                console.log(`404: ${
-                    decodeURI(ctx.request.url.pathname).replaceAll(" ", "%20")
-                }`)
+                const pathname = decodeURI(ctx.request.url.pathname).replaceAll(" ", "%20");
+                console.log(`404: ${pathname}`)
             }
+        }
+    } else {
+        await next();
+        ctx.response.body = {
+            data: ctx.response.body
         }
     }
 })
@@ -31,7 +35,6 @@ app.addEventListener("listen", ({ hostname, port }) => {
 });
 
 app.use(router.routes());
-
 
 
 await app.listen({ port });
