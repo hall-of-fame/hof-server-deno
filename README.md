@@ -14,11 +14,26 @@ Edit the configuration files `private.json` and `public.json` in `config/` direc
 
 Here are the options for configuration:
 
+### `hostname`
+
+```ts
+// type
+string
+// example
+"0.0.0.0"
+"127.0.0.1"
+```
+
+Just literally meaning the hostname of the server.
+
 ### `port`
 
 ```ts
 // type
 number
+// example
+8080
+3000
 ```
 
 Just literally meaning the port of the server.
