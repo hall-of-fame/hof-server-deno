@@ -1,6 +1,6 @@
 ## HOF Server (Deno)
 
-Hall of Fame Server, develop with Deno 🦕 & Oak 🌳.
+Hall of Fame Server, developed with Deno 🦕 & Oak 🌳.
 
 ## Getting Started
 
