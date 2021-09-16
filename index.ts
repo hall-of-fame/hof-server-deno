@@ -28,13 +28,12 @@ app.use(async (ctx, next) => {
     }
 })
 
+app.use(router.routes());
+
 app.addEventListener("listen", ({ hostname, port }) => {
     console.log(
         `Listening on: http://${hostname ?? "localhost"}:${port}`,
     );
 });
-
-app.use(router.routes());
-
 
 await app.listen({ port });
