@@ -38,6 +38,15 @@ number
 
 Just literally meaning the port of the server.
 
+### `password`
+
+```ts
+// type
+string
+```
+
+If this option is specified, the request needs the `Authorization` in the headers. And if the value doesn't match the sha3-512 code of the the `password`, the server will respond with the status code 401.
+
 ### `popular`
 
 ```ts
