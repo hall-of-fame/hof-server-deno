@@ -23,4 +23,5 @@ export const popular: Array<{
     url: string
 }> = config.popular ?? [];
 export const avatar: Record<string, string> = config.avatar ?? {};
+export const password: string | undefined = config.password;
 

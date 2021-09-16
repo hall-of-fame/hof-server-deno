@@ -1,12 +1,18 @@
 import { Application, Router, send } from "https://deno.land/x/oak@v9.0.0/mod.ts";
 import { departments, multiple, popular } from "./routers.ts";
-import { hostname, port } from "./config/config.ts"
+import { hostname, port, password } from "./config/config.ts"
+import auth from "./middlewares/auth.ts";
 
 const app = new Application();
 const router = new Router()
     .get("/departments", departments)
     .get("/multiple", multiple)
     .get("/popular", popular);
+
+if (password) {
+    console.log("Authorization Enabled")
+    app.use(auth);
+}
 
 app.use(async (ctx, next) => {
     if (ctx.request.url.pathname.startsWith("/static/")) {
