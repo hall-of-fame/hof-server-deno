@@ -1,3 +1,3 @@
-import { popular } from "../config/config.ts"
+import { popular } from "../config.ts"
 
 export default popular;

@@ -1,4 +1,4 @@
-import { avatar } from "../config/config.ts"
+import { avatar } from "../config.ts"
 
 const departments: Array<{
     name: string;
