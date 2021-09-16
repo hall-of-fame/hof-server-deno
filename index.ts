@@ -1,8 +1,8 @@
 import { Application, Router } from "https://deno.land/x/oak@v9.0.0/mod.ts";
+
 import { departments, multiple, popular } from "./routers.ts";
-import { hostname, port, password } from "./config.ts"
-import auth from "./middlewares/auth.ts";
-import root from "./middlewares/root.ts";
+import { hostname, port, password } from "./config.ts";
+import { auth, root } from "./middlewares.ts"
 
 const app = new Application();
 const router = new Router()
@@ -14,9 +14,7 @@ if (password) {
     console.log("Authorization Enabled")
     app.use(auth);
 }
-
 app.use(root);
-
 app.use(router.routes());
 
 app.addEventListener("listen", ({ hostname, port }) => {
