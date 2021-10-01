@@ -26,6 +26,8 @@ async function logger(ctx: Context, next: () => Promise<unknown>) {
     }
     else if (status === 404)
         console.log(yellow(logContent));
+    else
+        console.log(logContent);
 }
 
 
