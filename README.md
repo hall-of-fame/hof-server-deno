@@ -10,7 +10,7 @@ Hall of Fame Server, developed with Deno 🦕 & Oak 🌳.
 
 ## Configuration
 
-Edit the configuration files `private.json` and `public.json` in `config/` directory. These 2 files both have the same effect, but the priority of the `private.json` would be higher if they have conflicts.
+Edit the configuration files `private.json` and `public.json` in `./config` directory. These 2 files both have the same effect, but the priority of the `private.json` would be higher if they have conflicts.
 
 Here are the options for configuration:
 
@@ -18,10 +18,10 @@ Here are the options for configuration:
 
 ```ts
 // type
-string
+type Hostname = string
 // example
-"0.0.0.0"
-"127.0.0.1"
+const example_1: string = "0.0.0.0"
+const example_2: string = "127.0.0.1"
 ```
 
 Just literally meaning the hostname of the server.
@@ -30,10 +30,10 @@ Just literally meaning the hostname of the server.
 
 ```ts
 // type
-number
+type Port = number
 // example
-8080
-3000
+const example_1: number = 8080
+const example_2: number = 3000
 ```
 
 Just literally meaning the port of the server.
@@ -42,16 +42,16 @@ Just literally meaning the port of the server.
 
 ```ts
 // type
-string
+type Password = string
 ```
 
-If this option is specified, the request needs the `Authorization` in the headers. And if the value doesn't match the sha3-512 code of the the `password`, the server will respond with the status code 401.
+If this option is specified, the request needs the `Authorization` in the headers. And if the value doesn't match the `password`, the server will respond with the status code 401.
 
 ### `popular`
 
 ```ts
 // type
-Array<{
+type Popular = Array<{
     author: string,
     desc: string,
     url: string
@@ -64,9 +64,9 @@ This item's value will be responded when `GET /popular` is requested.
 
 ```ts
 // type
-Record<string, string>
+type Avatar = Record<string, string>
 // example
-{
+const example: Avatar = {
     "Yaju Senpai": "1145141919",
 }
 ```
