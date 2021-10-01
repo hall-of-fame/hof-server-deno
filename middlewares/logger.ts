@@ -7,10 +7,10 @@ async function logger(ctx: Context, next: () => Promise<unknown>) {
     const status = ctx.response.status;
     const time = getTimeString();
     const method = ctx.request.method;
-    const pathname = decodeURI(ctx.request.url.pathname).replaceAll(" ", "%20");
+    const pathname = decodeURI(ctx.request.url.pathname);
     const ip = ctx.request.ip;
 
-    const logContent = `[${status}] [${time}] ${method} ${pathname} from ${ip}`;
+    const logContent = `[${status}] [${time}] ${method} "${pathname}" from ${ip}`;
     Deno.writeTextFile("./requests.log", `${logContent}\n`, { append: true });
 
     if (status === 200)
@@ -40,7 +40,7 @@ function getTimeString(): string {
     const h = date.getHours().toString().padStart(2, "0");
     const min = date.getMinutes().toString().padStart(2, "0");
     const s = date.getSeconds().toString().padStart(2, "0");
-    return `${y}/${m}/${d} ${h}:${min}:${s}`;
+    return `${y}-${m}-${d} ${h}:${min}:${s}`;
 }
 
 export default logger;
