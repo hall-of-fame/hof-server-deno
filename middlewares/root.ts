@@ -6,21 +6,23 @@ async function root(ctx: Context, next: () => Promise<unknown>) {
         await handleStaticRequest(ctx);
     } else {
         await next();
-        ctx.response.body = {
-            data: ctx.response.body
+        if (ctx.response.status === 200) {
+            ctx.response.body = {
+                data: ctx.response.body
+            }
         }
     }
 }
 
 async function handleStaticRequest(ctx: Context) {
+    // In case of NotFoundError
     try {
         await send(ctx, ctx.request.url.pathname.slice(8), {
             root: `${Deno.cwd()}/static/`,
         })
     } catch (error) {
         if (error.name === "NotFoundError") {
-            const pathname = decodeURI(ctx.request.url.pathname).replaceAll(" ", "%20");
-            console.log(`404: ${pathname}`)
+            // Do nothing here because the logger middleware will show the warning message.
         }
     }
 }
