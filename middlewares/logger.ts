@@ -3,25 +3,41 @@ import { gray, green, red, yellow } from "https://deno.land/std@0.109.0/fmt/colo
 
 async function logger(ctx: Context, next: () => Promise<unknown>) {
     await next();
+
     const status = ctx.response.status;
-    const url = decodeURI(ctx.request.url.pathname).replaceAll(" ", "%20");
-    const logContent = `[${status}] ${ctx.request.method} ${url} from ${ctx.request.ip}`;
+    const time = getTimeString();
+    const method = ctx.request.method;
+    const pathname = decodeURI(ctx.request.url.pathname).replaceAll(" ", "%20");
+    const ip = ctx.request.ip;
+
+    const logContent = `[${status}] [${time}] ${method} ${pathname} from ${ip}`;
+
     if (status === 200)
-        if (ctx.request.url.pathname.startsWith("/static/"))
+        if (pathname.startsWith("/static/"))
             console.log(gray(logContent));
         else
             console.log(green(logContent));
     else if (status === 401) {
-        console.log(red(logContent));
         const password = ctx.request.headers.get("Authorization");
-        if (password) {
-            console.log(red(`      with the password: "${password}".`));
-        } else {
-            console.log(red(`      without passing password.`));
-        }
+        const description = password ?
+            `with the password: "${password}"` :
+            `without password`;
+        console.log(red(`${logContent}, ${description}.`));
     }
     else if (status === 404)
         console.log(yellow(logContent));
+}
+
+
+function getTimeString(): string {
+    const date = new Date();
+    const y = date.getFullYear();
+    const m = (date.getMonth() + 1).toString().padStart(2, "0");
+    const d = date.getDate().toString().padStart(2, "0");
+    const h = date.getHours().toString().padStart(2, "0");
+    const min = date.getMinutes().toString().padStart(2, "0");
+    const s = date.getSeconds().toString().padStart(2, "0");
+    return `${y}/${m}/${d} ${h}:${min}:${s}`;
 }
 
 export default logger;
