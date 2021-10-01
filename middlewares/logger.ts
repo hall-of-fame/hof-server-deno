@@ -11,6 +11,7 @@ async function logger(ctx: Context, next: () => Promise<unknown>) {
     const ip = ctx.request.ip;
 
     const logContent = `[${status}] [${time}] ${method} ${pathname} from ${ip}`;
+    Deno.writeTextFile("./requests.log", `${logContent}\n`, { append: true });
 
     if (status === 200)
         if (pathname.startsWith("/static/"))
