@@ -15,8 +15,8 @@ if (await exists("./config/private.json")) {
     Object.assign(config, privateConfig)
 }
 
-export const port = config.port;
-export const hostname = config.hostname;
+export const port: number = config.port;
+export const hostname: string = config.hostname;
 export const popular: Array<{
     author: string,
     desc: string,

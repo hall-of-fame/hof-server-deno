@@ -15,4 +15,10 @@ app.addEventListener("listen", ({ hostname, port }) => {
     console.log(`[LOG] Listening on: http://${hostname}:${port}`);
 });
 
-await app.listen({ hostname, port });
+await app.listen({
+    hostname,
+    port,
+    secure: true,
+    certFile: "./config/tls/full_chain.pem",
+    keyFile: "./config/tls/private.key"
+});
