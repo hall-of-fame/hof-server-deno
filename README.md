@@ -20,8 +20,8 @@ Here are the options for configuration:
 // type
 type Hostname = string
 // example
-const example_1: string = "0.0.0.0"
-const example_2: string = "127.0.0.1"
+const example_1: Hostname = "0.0.0.0"
+const example_2: Hostname = "127.0.0.1"
 ```
 
 Just literally meaning the hostname of the server.
@@ -32,11 +32,20 @@ Just literally meaning the hostname of the server.
 // type
 type Port = number
 // example
-const example_1: number = 8080
-const example_2: number = 3000
+const example_1: Port = 8080
+const example_2: Port = 3000
 ```
 
 Just literally meaning the port of the server.
+
+### `secure`
+
+```ts
+// type
+type Secure = boolean
+```
+
+If this option is set to `true`, the server will provide a secure connection, and try to find the certificate and private key in `./config/tls/full_chain.pem` and `./config/tls/private.key`.
 
 ### `password`
 
