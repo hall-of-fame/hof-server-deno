@@ -6,7 +6,10 @@ if (password) {
 }
 
 async function auth(ctx: Context, next: () => Promise<unknown>) {
-    if (ctx.request.headers.get("Authorization") === password) {
+    if (
+        ctx.request.headers.get("Authorization") === password ||
+        ctx.request.url.pathname.startsWith("/static/")
+    ) {
         await next();
     } else {
         ctx.response.status = 401;
