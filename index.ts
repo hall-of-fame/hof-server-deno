@@ -6,9 +6,9 @@ import { auth, root, routes, logger } from "./middlewares.ts"
 const app = new Application();
 
 app.use(logger);
+app.use(root);
 if (password)
     app.use(auth);
-app.use(root);
 app.use(routes);
 
 app.addEventListener("listen", ({ hostname, port }) => {
