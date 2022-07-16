@@ -1,7 +1,7 @@
 const multiple: Array<{
-    author: string,
-    desc: string,
-    url: string
+    author: string;
+    desc: string;
+    url: string;
 }> = [];
 const entryPath = "./static/multiple";
 
@@ -15,8 +15,8 @@ for await (const sticker of Deno.readDir(entryPath)) {
         author: res[1],
         desc: res[2],
         url: `/static/multiple/${sticker.name}`
-            .replaceAll(" ", "%20")
-    })
+            .replaceAll(" ", "%20"),
+    });
 }
 
 export default multiple;

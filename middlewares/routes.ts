@@ -1,7 +1,7 @@
 import { Context, Router } from "https://deno.land/x/oak@v9.0.0/mod.ts";
 import departmentsData from "../services/departments.ts";
 import multipleData from "../services/multiple.ts";
-import popularData from "../services/popular.ts"
+import popularData from "../services/popular.ts";
 
 function departments(ctx: Context) {
     ctx.response.body = departmentsData;

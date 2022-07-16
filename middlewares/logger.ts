@@ -1,5 +1,11 @@
 import { Context } from "https://deno.land/x/oak@v9.0.0/mod.ts";
-import { gray, green, red, yellow, reset } from "https://deno.land/std@0.109.0/fmt/colors.ts";
+import {
+    gray,
+    green,
+    red,
+    reset,
+    yellow,
+} from "https://deno.land/std@0.109.0/fmt/colors.ts";
 
 async function logger(ctx: Context, next: () => Promise<unknown>) {
     await next();
@@ -10,19 +16,21 @@ async function logger(ctx: Context, next: () => Promise<unknown>) {
     const pathname = decodeURI(ctx.request.url.pathname);
     const ip = ctx.request.ip;
 
-    const logContent = `[${status}] [${time}] ${method} "${pathname}" from ${ip}`;
+    const logContent =
+        `[${status}] [${time}] ${method} "${pathname}" from ${ip}`;
 
     const [log, color] = ((): [string, (str: string) => string] => {
         if (status === 200) {
-            if (pathname.startsWith("/static/"))
+            if (pathname.startsWith("/static/")) {
                 return [logContent, gray];
-            else
+            } else {
                 return [logContent, green];
+            }
         } else if (status === 401) {
             const password = ctx.request.headers.get("Authorization");
-            const description = password ?
-                `with the password: "${password}"` :
-                `without password`;
+            const description = password
+                ? `with the password: "${password}"`
+                : `without password`;
             return [`${logContent}, ${description}.`, red];
         } else if (status === 404) {
             return [logContent, yellow];
@@ -32,7 +40,7 @@ async function logger(ctx: Context, next: () => Promise<unknown>) {
     })();
 
     Deno.writeTextFile("./requests.log", `${log}\n`, { append: true });
-    console.log(color(log))
+    console.log(color(log));
 }
 
 function getTimeString(): string {

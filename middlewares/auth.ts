@@ -1,8 +1,8 @@
 import { Context } from "https://deno.land/x/oak@v9.0.0/mod.ts";
-import { password } from "../config.ts"
+import { password } from "../config.ts";
 
 if (password) {
-    console.log("[LOG] Authorization Enabled")
+    console.log("[LOG] Authorization Enabled");
 }
 
 async function auth(ctx: Context, next: () => Promise<unknown>) {
@@ -14,4 +14,3 @@ async function auth(ctx: Context, next: () => Promise<unknown>) {
 }
 
 export default auth;
-
