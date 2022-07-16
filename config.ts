@@ -4,23 +4,20 @@ type Config = {
     hostname: string;
     port: number;
     /**
-     * If this option is set to `true`, the server
-     * will provide a secure connection, and try to
-     * find the certificate and private key in
-     * `./config/tls/full_chain.pem` and
-     * `./config/tls/private.key`.
+     * If this option is set to `true`, the server will provide a secure
+     * connection, and try to find the certificate and private key in
+     * `./config/tls/full_chain.pem` and `./config/tls/private.key`.
      */
     secure: boolean;
     /**
-     * If this option is specified, the request needs
-     * the `Authorization` in the headers. And if the
-     * value doesn't match the `password`, the server
-     * will respond with the status code 401.
+     * If this option is specified, the request needs the `Authorization`
+     * in the headers. And if the value doesn't match the `password`,
+     * the server will respond with the status code 401.
      */
     password?: string;
     /**
-     * This item's value will be responded when
-     * `GET /popular` is requested.
+     * This item's value will be responded when `GET /popular` is
+     * requested.
      */
     popular: Array<{
         author: string;
@@ -28,9 +25,8 @@ type Config = {
         url: string;
     }>;
     /**
-     * It's a map of the username to its
-     * corresponding QQ id. So the client will then
-     * get the avatar url by the QQ id.
+     * It's a map of the username to its corresponding QQ id. So the
+     * client will then get the avatar url by the QQ id.
      */
     avatar: Record<string, string>;
 };
