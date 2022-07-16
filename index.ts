@@ -1,6 +1,6 @@
 import { Application } from "https://deno.land/x/oak@v9.0.0/mod.ts";
 
-import { host, password, port, secure } from "./config.ts";
+import { host, password, port, secure } from "./config/index.ts";
 import { auth, logger, root, routes } from "./middlewares.ts";
 
 const app = new Application();

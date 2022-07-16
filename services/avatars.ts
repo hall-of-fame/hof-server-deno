@@ -1,4 +1,4 @@
-import { avatars as srcAvatars } from '../config.ts'
+import { avatars as srcAvatars } from '../config/index.ts'
 
 const avatars: Record<string, string> = {}
 Object.entries(srcAvatars).map(([key, value]) => {

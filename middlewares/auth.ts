@@ -1,5 +1,5 @@
 import { Context } from "https://deno.land/x/oak@v9.0.0/mod.ts";
-import { password } from "../config.ts";
+import { password } from "../config/index.ts";
 
 if (password) {
     console.log("[LOG] Authorization Enabled");
