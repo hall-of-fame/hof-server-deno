@@ -1,7 +1,7 @@
 import { exists } from "https://deno.land/std@0.107.0/fs/mod.ts";
 
 type Config = {
-    hostname: string;
+    host: string;
     port: number;
     /**
      * If this option is set to `true`, the server will provide a secure
@@ -44,8 +44,8 @@ async function getConfig(): Promise<Partial<Config>> {
 
 const config = await getConfig();
 
+export const host: string = config.host ?? "127.0.0.1";
 export const port: number = config.port ?? 8000;
-export const hostname: string = config.hostname ?? "127.0.0.1";
 /** @deprecated */
 export const popular: Array<{
     author: string;

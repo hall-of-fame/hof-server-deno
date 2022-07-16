@@ -1,6 +1,6 @@
 import { Application } from "https://deno.land/x/oak@v9.0.0/mod.ts";
 
-import { hostname, password, port, secure } from "./config.ts";
+import { host, password, port, secure } from "./config.ts";
 import { auth, logger, root, routes } from "./middlewares.ts";
 
 const app = new Application();
@@ -19,7 +19,7 @@ app.addEventListener("listen", ({ hostname, port }) => {
 const listenOptions = Object.assign(
     {},
     {
-        hostname,
+        host,
         port,
     },
     secure
