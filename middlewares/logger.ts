@@ -21,11 +21,10 @@ async function logger(ctx: Context, next: () => Promise<unknown>) {
 
     const [log, color] = ((): [string, (str: string) => string] => {
         if (status === 200) {
-            if (pathname.startsWith("/static/")) {
-                return [logContent, gray];
-            } else {
-                return [logContent, green];
-            }
+            return [
+                logContent,
+                pathname.startsWith("/static/") ? gray : green
+            ];
         } else if (status === 401) {
             const password = ctx.request.headers.get("Authorization");
             const description = password
