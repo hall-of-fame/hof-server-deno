@@ -1,31 +1,29 @@
-type Sticker = {
-    desc: string;
-    url: string;
-}
-type Student = {
-    name: string;
-    stickers: Array<Sticker>;
-};
-type Grade = {
-    name: string;
-    students: Array<Student>;
-};
-type Department = {
-    name: string;
-    grades: Array<Grade>;
-}
+import { avatars } from "../../config.ts";
 
-const departments: Array<Department> = [];
+const departments: Array<{
+    name: string;
+    grades: Array<{
+        name: string;
+        students: Array<{
+            name: string;
+            avatar: string;
+            stickers: Array<{
+                desc: string;
+                url: string;
+            }>;
+        }>;
+    }>;
+}> = [];
 const entryPath = "./static/departments";
 
 for await (const department of Deno.readDir(entryPath)) {
-    const grades: Grade[] = [];
+    const grades = [];
     const gradesDir = `${entryPath}/${department.name}`;
     for await (const grade of Deno.readDir(gradesDir)) {
-        const students: Student[] = [];
+        const students = [];
         const studentsDir = `${gradesDir}/${grade.name}`;
         for await (const student of Deno.readDir(studentsDir)) {
-            const stickers: Sticker[] = [];
+            const stickers = [];
             const stickersDir = `${studentsDir}/${student.name}`;
             for await (const item of Deno.readDir(stickersDir)) {
                 if (item.isDirectory) {
@@ -45,8 +43,17 @@ for await (const department of Deno.readDir(entryPath)) {
                     });
                 }
             }
+            let avatar: string;
+            if (typeof avatars[student.name] === 'number') {
+                avatar = avatars[student.name].toString()
+            } else if (typeof avatars[student.name] === 'string') {
+                avatar = avatars[student.name] as string
+            } else {
+                avatar = ''
+            }
             students.push({
                 name: student.name,
+                avatar,
                 stickers: stickers,
             });
         }

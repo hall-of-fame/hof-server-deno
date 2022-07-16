@@ -16,6 +16,7 @@ type Config = {
      */
     password?: string;
     /**
+     * @deprecated
      * This item's value will be responded when `GET /popular` is
      * requested.
      */
@@ -28,7 +29,7 @@ type Config = {
      * It's a map of the username to its corresponding QQ id. So the
      * client will then get the avatar url by the QQ id.
      */
-    avatar: Record<string, string>;
+    avatars: Record<string, string>;
 };
 
 async function getConfig(): Promise<Partial<Config>> {
@@ -45,11 +46,12 @@ const config = await getConfig();
 
 export const port: number = config.port ?? 8000;
 export const hostname: string = config.hostname ?? "127.0.0.1";
+/** @deprecated */
 export const popular: Array<{
     author: string;
     desc: string;
     url: string;
 }> = config.popular ?? [];
-export const avatar: Record<string, string> = config.avatar ?? {};
+export const avatars: Record<string, number | string> = config.avatars ?? {};
 export const password: string | undefined = config.password;
 export const secure: boolean = config.secure ?? false;
