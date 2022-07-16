@@ -2,9 +2,13 @@ type Sticker = {
     desc: string;
     url: string;
 }
-type Student = {
+type Category = {
     name: string;
     stickers: Array<Sticker>;
+}
+type Student = {
+    name: string;
+    categories: Array<Category>;
 };
 type Grade = {
     name: string;
@@ -25,11 +29,12 @@ for await (const department of Deno.readDir(entryPath)) {
         const students: Student[] = [];
         const studentsDir = `${gradesDir}/${grade.name}`;
         for await (const student of Deno.readDir(studentsDir)) {
-            const stickers: Sticker[] = [];
+            const categories: Category[] = [{ name: "Default", stickers: [] }];
             const stickersDir = `${studentsDir}/${student.name}`;
             for await (const item of Deno.readDir(stickersDir)) {
                 if (item.isDirectory) {
                     const categoryDir = `${stickersDir}/${item.name}`;
+                    const stickers: Sticker[] = [];
                     for await (const sticker of Deno.readDir(categoryDir)) {
                         stickers.push({
                             desc: sticker.name.replace(/(.*)\.(.*)/, "$1"),
@@ -37,8 +42,9 @@ for await (const department of Deno.readDir(entryPath)) {
                                 .replaceAll(" ", "%20"),
                         });
                     }
+                    categories.push({ name: item.name, stickers });
                 } else {
-                    stickers.push({
+                    categories[0].stickers.push({
                         desc: item.name.replace(/(.*)\.(.*)/, "$1"),
                         url: `/static/departments/${department.name}/${grade.name}/${student.name}/${item.name}`
                             .replaceAll(" ", "%20"),
@@ -47,17 +53,17 @@ for await (const department of Deno.readDir(entryPath)) {
             }
             students.push({
                 name: student.name,
-                stickers: stickers,
+                categories,
             });
         }
         grades.push({
             name: grade.name,
-            students: students,
+            students,
         });
     }
     departments.push({
         name: department.name,
-        grades: grades,
+        grades,
     });
 }
 
