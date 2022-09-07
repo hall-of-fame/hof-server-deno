@@ -1,3 +1,5 @@
+import avatars from "./avatars.ts";
+
 type Sticker = {
     desc: string;
     url: string;
@@ -8,6 +10,7 @@ type Category = {
 }
 type Student = {
     name: string;
+    avatar: string;
     categories: Array<Category>;
 };
 type Grade = {
@@ -53,6 +56,7 @@ for await (const department of Deno.readDir(entryPath)) {
             }
             students.push({
                 name: student.name,
+                avatar: avatars[student.name],
                 categories,
             });
         }
