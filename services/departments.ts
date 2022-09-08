@@ -32,7 +32,7 @@ for await (const department of Deno.readDir(entryPath)) {
         const students: Student[] = [];
         const studentsDir = `${gradesDir}/${grade.name}`;
         for await (const student of Deno.readDir(studentsDir)) {
-            const categories: Category[] = [{ name: "Default", stickers: [] }];
+            const categories: Category[] = [{ name: "未归类", stickers: [] }];
             const stickersDir = `${studentsDir}/${student.name}`;
             for await (const item of Deno.readDir(stickersDir)) {
                 if (item.isDirectory) {
