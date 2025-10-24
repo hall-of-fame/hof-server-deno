@@ -19,11 +19,13 @@ app.addEventListener('listen', ({ hostname, port }) => {
 const listenOptions = {
   hostname,
   port,
-  ...(secure ? {
-    secure: true,
-    certFile: './config/tls/full_chain.pem',
-    keyFile: './config/tls/private.key',
-  } as const : { secure: false } as const)
+  ...(secure
+    ? {
+      secure: true,
+      certFile: './config/tls/full_chain.pem',
+      keyFile: './config/tls/private.key',
+    } as const
+    : { secure: false } as const),
 };
 
 await app.listen(listenOptions);
