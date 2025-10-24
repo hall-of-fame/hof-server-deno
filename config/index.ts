@@ -1,4 +1,4 @@
-import { exists } from "https://deno.land/std@0.107.0/fs/mod.ts";
+import { exists } from "@std/fs";
 
 type Config = {
     host: string;

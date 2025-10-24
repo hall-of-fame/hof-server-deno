@@ -5,7 +5,7 @@ import {
     red,
     reset,
     yellow,
-} from "https://deno.land/std@0.109.0/fmt/colors.ts";
+} from "@std/fmt/color";
 
 async function logger(ctx: Context, next: () => Promise<unknown>) {
     await next();
