@@ -1,4 +1,4 @@
-import { HttpError, send, Status } from 'oak';
+import { ErrorStatus, HttpError, send, Status } from 'oak';
 import { Context } from 'oak';
 
 async function root(ctx: Context, next: () => Promise<unknown>) {
@@ -28,7 +28,7 @@ async function handleStaticRequest(ctx: Context) {
       root: `${Deno.cwd()}/static/`,
     });
   } catch (e) {
-    const err = e as HttpError;
+    const err = e as HttpError<ErrorStatus>;
     if (err.status === Status.NotFound) {
       // Do nothing here because the logger middleware will show the warning message.
     }
