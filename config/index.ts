@@ -1,7 +1,7 @@
 import { exists } from '@std/fs';
 
 type Config = {
-  host: string;
+  hostname: string;
   port: number;
   /**
    * If this option is set to `true`, the server will provide a secure
@@ -44,7 +44,7 @@ async function getConfig(): Promise<Partial<Config>> {
 
 const config = await getConfig();
 
-export const host: string = config.host ?? '127.0.0.1';
+export const hostname: string = config.hostname ?? '127.0.0.1';
 export const port: number = config.port ?? 8000;
 /** @deprecated */
 export const popular: Array<{

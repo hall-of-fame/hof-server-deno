@@ -3,7 +3,7 @@
     "start": "deno run --allow-read=./ --allow-write=./requests.log --allow-net index.ts"
   },
   "imports": {
-    "oak": "jsr:@oak/oak@15.0.0",
+    "oak": "jsr:@oak/oak@16.0.0",
     "@std/fs": "jsr:@std/fs@1.0.19",
     "@std/fmt/colors": "jsr:@std/fmt@1.0.8/colors"
   },

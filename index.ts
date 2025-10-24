@@ -1,6 +1,6 @@
 import { Application } from 'oak';
 
-import { host, password, port, secure } from './config/index.ts';
+import { hostname, password, port, secure } from './config/index.ts';
 import { auth, logger, root, routes } from './middlewares/index.ts';
 
 const app = new Application();
@@ -16,19 +16,14 @@ app.addEventListener('listen', ({ hostname, port }) => {
   console.log(`[LOG] Listening on: http://${hostname}:${port}`);
 });
 
-const listenOptions = Object.assign(
-  {},
-  {
-    host,
-    port,
-  },
-  secure
-    ? {
-      secure: true,
-      certFile: './config/tls/full_chain.pem',
-      keyFile: './config/tls/private.key',
-    }
-    : {},
-);
+const listenOptions = {
+  hostname,
+  port,
+  ...(secure ? {
+    secure: true,
+    certFile: './config/tls/full_chain.pem',
+    keyFile: './config/tls/private.key',
+  } as const : { secure: false } as const)
+};
 
 await app.listen(listenOptions);
