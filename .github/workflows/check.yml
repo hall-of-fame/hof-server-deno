@@ -2,9 +2,9 @@ name: Deno Check
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   check:
@@ -24,6 +24,6 @@ jobs:
 
       - name: Check Lint
         run: deno lint
-        
+
       - name: Check Format
         run: deno fmt --check
