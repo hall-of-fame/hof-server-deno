@@ -1,1 +1,0 @@
-deno run --unstable --allow-read=./ --allow-write=./requests.log --allow-net index.ts
