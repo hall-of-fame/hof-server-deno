@@ -5,7 +5,7 @@
     "imports": {
         "oak": "https://deno.land/x/oak@v9.0.0/mod.ts",
         "@std/fs": "https://deno.land/std@0.107.0/fs/mod.ts",
-        "@std/fmt/color": "https://deno.land/std@0.109.0/fmt/colors.ts"
+        "@std/fmt/colors": "https://deno.land/std@0.109.0/fmt/colors.ts"
     },
     "fmt": {
         "files": {

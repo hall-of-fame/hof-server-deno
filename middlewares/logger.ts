@@ -5,7 +5,7 @@ import {
     red,
     reset,
     yellow,
-} from "@std/fmt/color";
+} from "@std/fmt/colors";
 
 async function logger(ctx: Context, next: () => Promise<unknown>) {
     await next();
