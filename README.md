@@ -5,7 +5,7 @@ Hall of Fame Server, developed with Deno 🦕 & Oak 🌳.
 ## Getting Started
 
 ```bash
-./start.sh
+deno task start
 ```
 
 ## Configuration
