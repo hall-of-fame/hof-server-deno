@@ -1,5 +1,5 @@
-import { send } from "https://deno.land/x/oak@v9.0.0/mod.ts";
-import { Context } from "https://deno.land/x/oak@v9.0.0/mod.ts";
+import { send } from "oak";
+import { Context } from "oak";
 
 async function root(ctx: Context, next: () => Promise<unknown>) {
     ctx.response.headers.set("Access-Control-Allow-Origin", "*");

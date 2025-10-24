@@ -2,6 +2,9 @@
     "tasks": {
         "start": "deno run --allow-read=./ --allow-write=./requests.log --allow-net index.ts"
     },
+    "imports": {
+        "oak": "https://deno.land/x/oak@v9.0.0/mod.ts"
+    },
     "fmt": {
         "files": {
             "exclude": ["static", "*.md"]
