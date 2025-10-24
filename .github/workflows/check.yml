@@ -1,0 +1,29 @@
+name: Deno Check
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Check Types
+        run: deno check index.ts
+
+      - name: Check Lint
+        run: deno lint
+        
+      - name: Check Format
+        run: deno fmt --check
